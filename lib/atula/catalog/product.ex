@@ -2,6 +2,8 @@ defmodule Atula.Catalog.Product do
   use Ecto.Schema
   import Ecto.Changeset
 
+  alias Atula.Catalog.Category
+
   schema "products" do
     field :description, :string
     field :price, :decimal

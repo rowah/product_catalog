@@ -10,6 +10,7 @@ defmodule Atula.Repo.Migrations.CreateProductCategories do
     create index(:product_categories, [:product_id])
     create index(:product_categories, [:category_id])
     create unique_index(:product_categories, [:product_id, :category_id])
+  end
 
   end
 end
