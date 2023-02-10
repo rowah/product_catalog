@@ -44,6 +44,12 @@ defmodule AtulaWeb.Router do
 
     get "/", PageController, :index
     resources "/products", ProductController
+
+
+    resources "/cart_items", CartItemController, only: [:create, :delete]
+
+    get "/cart", CartController, :show
+    put "/cart", CartController, :update
   end
 
   # Other scopes may use custom stacks.
