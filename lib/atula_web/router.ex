@@ -51,11 +51,15 @@ defmodule AtulaWeb.Router do
     resources "/orders", OrderController
 
 #wire up the routes for a create and delete action for adding and remove individual cart items
-    resources "/cart_items", CartItemController, only: [:create, :delete]
+
 
 
     get "/cart", CartController, :show
     put "/cart", CartController, :update
+
+
+    resources "/cart_items", CartItemController, only: [:create, :delete]
+    resources "/orders", OrderController, only: [:create, :show]
   end
 
   # Other scopes may use custom stacks.
