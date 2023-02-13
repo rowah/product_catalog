@@ -4,7 +4,8 @@ defmodule Atula.Repo.Migrations.CreateOrders do
   def change do
     create table(:orders) do
       add :user_uuid, :uuid
-      add :total_price, :decimal
+      #gives appropriate precision and scale options for decimal column/not-null constraint enforces all orders price.
+      add :total_price, :decimal, precision: 10, scale: 6, null: false
 
       timestamps()
     end
