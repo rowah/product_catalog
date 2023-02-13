@@ -13,22 +13,25 @@ defmodule AtulaWeb.Router do
   end
 
   defp fetch_current_user(conn, _) do
+    #checks the session for a user UUID that was previously added and if found add a current_uuid assign to the connection
     if user_uuid = get_session(conn, :current_uuid) do
       assign(conn, :current_uuid, user_uuid)
     else
+      #for an unidentified visitor, generate a unique UUID
       new_uuid = Ecto.UUID.generate()
 
-
+#place that value in the current_uuid assign, along with a new session value to identify this visitor on future requests
       conn
-      |> assign(:currents_uuid, new_uuid)
-      |> put_session(:currents_uuid, new_uuid)
+      |> assign(:current_uuid, new_uuid)
+      |> put_session(:current_uuid, new_uuid)
     end
   end
 
   alias Atula.ShoppingCart
 
-  defp fetch_current_cart(conn, _opts) do
-    if cart = ShoppingCart.get_cart_by_user_uuid(conn.assisgns.current_uuid) do
+  #finds a cart for the user UUID or creates a cart for the current user and assigns the result in the connection assigns
+  def fetch_current_cart(conn, _opts) do
+    if cart = ShoppingCart.get_cart_by_user_uuid(conn.assigns.current_uuid) do
       assign(conn, :cart, cart)
     else
       {:ok, new_cart} = ShoppingCart.create_cart(conn.assigns.current_uuid)
@@ -45,8 +48,9 @@ defmodule AtulaWeb.Router do
     get "/", PageController, :index
     resources "/products", ProductController
 
-
+#wire up the routes for a create and delete action for adding and remove individual cart items
     resources "/cart_items", CartItemController, only: [:create, :delete]
+
 
     get "/cart", CartController, :show
     put "/cart", CartController, :update

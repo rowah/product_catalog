@@ -1,7 +1,7 @@
-defmodule HelloWeb.CartItemController do
+defmodule AtulaWeb.CartItemController do
   use AtulaWeb, :controller
 
-  alias Hello.{ShoppingCart, Catalog}
+  alias Atula.{ShoppingCart, Catalog}
 
   def create(conn, %{"product_id" => product_id}) do
     product = Catalog.get_product!(product_id)
