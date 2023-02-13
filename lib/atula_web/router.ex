@@ -22,8 +22,8 @@ defmodule AtulaWeb.Router do
 
 #place that value in the current_uuid assign, along with a new session value to identify this visitor on future requests
       conn
-      |> assign(:currents_uuid, new_uuid)
-      |> put_session(:currents_uuid, new_uuid)
+      |> assign(:current_uuid, new_uuid)
+      |> put_session(:current_uuid, new_uuid)
     end
   end
 
