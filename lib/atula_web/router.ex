@@ -48,6 +48,8 @@ defmodule AtulaWeb.Router do
     get "/", PageController, :index
     resources "/products", ProductController
 
+    resources "/orders", OrderController
+
 #wire up the routes for a create and delete action for adding and remove individual cart items
     resources "/cart_items", CartItemController, only: [:create, :delete]
 
