@@ -13,4 +13,3 @@ defmodule Atula.Repo.Migrations.CreateProductCategories do
   end
 
   end
-end
